@@ -1,13 +1,100 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 45fr 55fr;
+
+  width: 60vw;
+  column-gap: 8rem;
+}
+
+.friends-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 4rem;
+}
+
+.friend-wrapper {
+  display: grid;
+  grid-template-columns: 6.4rem 1fr auto;
+  align-items: center;
+  column-gap: 1.8rem;
+}
+
+.friend-wrapper img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 1000rem;
+}
+
+.friend-details {
+}
+
+.friend-details h3 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1.4rem;
+}
+
+.friend-details p {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: none;
+  border: none;
+  color: #333;
+  font-weight: 800;
+  font-size: 1.6rem;
+  padding: 0.8rem 1.6rem;
+
+  border-radius: 0.9rem;
+  background-color: #fb923c;
+}
+
+/*  */
+
+.split-bill--box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #ffedd5;
+  border-radius: 0.9rem;
+  padding: 4rem;
+}
+
+.split-bill--box h2 {
+  font-size: 3.2rem;
+  text-transform: uppercase;
+  color: #555;
+  letter-spacing: -1px;
+  margin-bottom: 4rem;
+}
+
+.splitting-form {
 }

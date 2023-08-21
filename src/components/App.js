@@ -21,7 +21,7 @@ const friends = [
 export default function App() {
   return (
     <div className="app">
-      <FriendsList />
+      <Sidebar />
       <SplitBill />
     </div>
   );
@@ -32,41 +32,48 @@ function SplitBill() {
     <div className="split-bill--box">
       <h2>Split a bill with Sarah</h2>
       <form className="splitting-form">
-        <div>
-          <label>💰 Bill value</label>
-          <input type="number"></input>
-        </div>
+        <label>💰 Bill value</label>
+        <input type="number"></input>
 
-        <div>
-          <label>🧍‍♂️ Your expanses</label>
-          <input type="number"></input>
-        </div>
+        <label>🧍‍♂️ Your expanses</label>
+        <input type="number"></input>
 
-        <div>
-          <label>🧍‍♀️🧍 Sarah expanses</label>
-          <input type="number"></input>
-        </div>
+        <label>🧑‍🤝‍🧑Sarah expanses</label>
+        <input type="number"></input>
 
-        <div>
-          <label>🤑 Who's paying the bill</label>
-          <select>
-            {friends.map((friend) => (
-              <option value={friend.name}>{friend.name}</option>
-            ))}
-          </select>
-        </div>
+        <label>🤑 Who's paying the bill</label>
+        <select>
+          <option>You</option>
+          {friends.map((friend) => (
+            <option value={friend.name} key={friend.id}>
+              {friend.name}
+            </option>
+          ))}
+        </select>
       </form>
     </div>
   );
 }
 
-function FriendsList() {
+function Sidebar() {
   return (
-    <ul className="friends-list">
-      {friends.map((friend) => (
-        <Friend key={friend.id} name={friend.name} debt={friend.debts} />
-      ))}
-    </ul>
+    <div className="Side-bar">
+      <FriendList />
+      <AddFriend />
+    </div>
+  );
+}
+
+function FriendList() {
+  return (
+    <div className="friend-list-wrapper">
+      <ul className="friends-list">
+        {friends.map((friend) => (
+          <Friend key={friend.id} name={friend.name} debt={friend.debts} />
+        ))}
+      </ul>
+      <Button className="add-friend--btn">Add Friend</Button>
+    </div>
   );
 }
 
@@ -78,13 +85,26 @@ function Friend({ name, debt }) {
         <h3>Riad H.</h3>
         <p>You and {name} are even</p>
       </div>
-      <Button />
+      <Button>Select</Button>
     </li>
   );
 }
 
-function AddFriend() {}
+function AddFriend() {
+  return (
+    <div className="add-friend-wrapper">
+      <form className="add-friend-form">
+        <label>🧑‍🤝‍🧑 Friend name</label>
+        <input type="text"></input>
+        <label>🖼️ Image URL</label>
+        <input type="text"></input>
+        <span></span>
+        <Button>Add</Button>
+      </form>
+    </div>
+  );
+}
 
-function Button() {
-  return <button className="btn-primary">Select</button>;
+function Button({ children }) {
+  return <button className="btn-primary">{children}</button>;
 }

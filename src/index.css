@@ -15,16 +15,24 @@ body {
   color: #333;
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 16rem;
   height: 100vh;
 }
 
 .app {
   display: grid;
-  grid-template-columns: 45fr 55fr;
+  grid-template-columns: 35fr 65fr;
 
-  width: 60vw;
+  width: 45vw;
   column-gap: 8rem;
+}
+
+.friend-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4rem;
+  /* padding: 4rem; */
 }
 
 .friends-list {
@@ -32,19 +40,21 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 4rem;
+}
+
+.add-friend--btn {
 }
 
 .friend-wrapper {
   display: grid;
-  grid-template-columns: 6.4rem 1fr auto;
+  grid-template-columns: 4.8rem 1fr auto;
   align-items: center;
   column-gap: 1.8rem;
 }
 
 .friend-wrapper img {
-  width: 6rem;
-  height: 6rem;
+  width: 4.8rem;
+  height: 4.8rem;
   border-radius: 1000rem;
 }
 
@@ -52,13 +62,13 @@ body {
 }
 
 .friend-details h3 {
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 1.4rem;
+  margin-bottom: 0.6rem;
 }
 
 .friend-details p {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
@@ -67,12 +77,12 @@ body {
   background: none;
   border: none;
   color: #333;
-  font-weight: 800;
-  font-size: 1.6rem;
+  font-weight: 700;
+  font-size: 1.4rem;
   padding: 0.8rem 1.6rem;
 
   border-radius: 0.9rem;
-  background-color: #fb923c;
+  background-color: #f59e0b;
 }
 
 /*  */
@@ -83,13 +93,13 @@ body {
   justify-content: center;
   align-items: center;
 
-  background-color: #ffedd5;
+  background-color: #fff7ed;
   border-radius: 0.9rem;
   padding: 4rem;
 }
 
 .split-bill--box h2 {
-  font-size: 3.2rem;
+  font-size: 2.4rem;
   text-transform: uppercase;
   color: #555;
   letter-spacing: -1px;
@@ -97,4 +107,41 @@ body {
 }
 
 .splitting-form {
+  font-size: 1.6rem;
+  font-weight: 500;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 60% 30%;
+  row-gap: 1.4rem;
+}
+
+.splitting-form input,
+select {
+  font-size: 1.6rem;
+  border: none;
+  height: 3.2rem;
+}
+
+/*  */
+.add-friend-wrapper {
+  background-color: #fff7ed;
+  border-radius: 0.9rem;
+  padding: 4rem 2rem;
+}
+
+.add-friend-form {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  row-gap: 2rem;
+}
+
+.add-friend-form button {
+}
+
+.add-friend-form label {
+  font-size: 1.8rem;
+}
+
+.add-friend-form input {
+  font-size: 1.8rem;
 }

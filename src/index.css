@@ -60,6 +60,10 @@ body {
   background-color: #ffedd5;
 }
 
+.friend--active {
+  background-color: #ffedd5;
+}
+
 .friend-wrapper img {
   width: 4.8rem;
   height: 4.8rem;

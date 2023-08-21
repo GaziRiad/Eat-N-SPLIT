@@ -53,6 +53,9 @@ export default function App() {
   ]);
 
   const [showAddFriend, setShowAddFriend] = useState(false);
+
+  const [friendSelected, setFriendSelected] = useState(null);
+
   function handleShowAddFriend() {
     setShowAddFriend((showAddFriend) => !showAddFriend);
   }
@@ -62,58 +65,44 @@ export default function App() {
     handleShowAddFriend(false);
   }
 
+  function handleSelectFriend(friend) {
+    setFriendSelected(friend);
+    if (friend.id === friendSelected?.id) setFriendSelected(null);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendList friends={friends} />
+        <FriendList
+          friends={friends}
+          onSelect={handleSelectFriend}
+          friendSelected={friendSelected}
+        />
+
         {showAddFriend && (
           <AddFriend friends={friends} OnAdd={handleAddFriend} />
         )}
+
         <Button classB={"add-friend--btn"} onClick={handleShowAddFriend}>
           {showAddFriend ? "close" : "Add Friend"}
         </Button>
       </div>
-      <SplitBill />
+
+      {friendSelected ? <SplitBill friend={friendSelected} /> : <></>}
     </div>
   );
 }
 
-function SplitBill() {
-  return (
-    <div className="split-bill--box">
-      <h2>Split a bill with Sarah</h2>
-      <form className="splitting-form">
-        <label>💰 Bill value</label>
-        <input type="number"></input>
-
-        <label>🧍‍♂️ Your expanses</label>
-        <input type="number"></input>
-
-        <label>🧑‍🤝‍🧑Sarah expanses</label>
-        <input type="number" disabled></input>
-
-        <label>🤑 Who's paying the bill</label>
-        <select>
-          <option>You</option>
-          <option value="friend">Sarah</option>
-        </select>
-        <span></span>
-        <Button>Split bill</Button>
-      </form>
-    </div>
-  );
-}
-
-function FriendList({ friends }) {
+function FriendList({ friends, onSelect, friendSelected }) {
   return (
     <div className="friend-list-wrapper">
       <ul className="friends-list">
         {friends.map((friend) => (
           <Friend
             key={friend.id}
-            name={friend.name}
-            balance={friend.balance}
-            image={friend.image}
+            friend={friend}
+            onSelect={onSelect}
+            friendSelected={friendSelected}
           />
         ))}
       </ul>
@@ -121,21 +110,34 @@ function FriendList({ friends }) {
   );
 }
 
-function Friend({ name, image, balance }) {
+function Friend({ friend, onSelect, friendSelected }) {
   return (
-    <li className="friend-wrapper">
-      <img src={image} alt={`${name}`} />
+    <li
+      className={
+        friend.id === friendSelected?.id
+          ? "friend-wrapper friend--active"
+          : "friend-wrapper"
+      }
+    >
+      <img src={friend.image} alt={`${friend.name}`} />
       <div className="friend-details">
-        <h3>{name}</h3>
-        <p style={{ color: balance > 0 ? "green" : balance < 0 ? "red" : {} }}>
-          {balance > 0
-            ? `${name} owes you ${balance}£`
-            : balance === 0
-            ? `You and ${name} are even`
-            : `you owe ${name} ${Math.abs(balance)}£`}
+        <h3>{friend.name}</h3>
+        <p
+          style={{
+            color:
+              friend.balance > 0 ? "green" : friend.balance < 0 ? "red" : {},
+          }}
+        >
+          {friend.balance > 0
+            ? `${friend.name} owes you ${friend.balance}£`
+            : friend.balance === 0
+            ? `You and ${friend.name} are even`
+            : `you owe ${friend.name} ${Math.abs(friend.balance)}£`}
         </p>
       </div>
-      <Button>Select</Button>
+      <Button onClick={() => onSelect(friend)}>
+        {friendSelected?.id === friend.id ? "close" : "select"}
+      </Button>
     </li>
   );
 }
@@ -175,6 +177,32 @@ function AddFriend({ OnAdd }) {
         ></input>
         <span></span>
         <Button>Add</Button>
+      </form>
+    </div>
+  );
+}
+
+function SplitBill({ friend }) {
+  return (
+    <div className="split-bill--box">
+      <h2>Split a bill with {friend.name}</h2>
+      <form className="splitting-form">
+        <label>💰 Bill value</label>
+        <input type="number"></input>
+
+        <label>🧍‍♂️ Your expanses</label>
+        <input type="number"></input>
+
+        <label>🧑‍🤝‍🧑{friend.name} expanses</label>
+        <input type="number" disabled></input>
+
+        <label>🤑 Who's paying the bill</label>
+        <select>
+          <option>You</option>
+          <option value="friend">{friend.name}</option>
+        </select>
+        <span></span>
+        <Button>Split bill</Button>
       </form>
     </div>
   );

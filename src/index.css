@@ -17,20 +17,26 @@ body {
   justify-content: center;
   margin-top: 16rem;
   height: 100vh;
+  overflow: hidden;
 }
 
 .app {
   display: grid;
-  grid-template-columns: 35fr 65fr;
+  grid-template-columns: 50fr 50fr;
 
   width: 45vw;
   column-gap: 8rem;
 }
 
-.friend-list-wrapper {
+.sidebar {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+}
+
+.friend-list-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 4rem;
   /* padding: 4rem; */
 }
@@ -39,10 +45,6 @@ body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-}
-
-.add-friend--btn {
 }
 
 .friend-wrapper {
@@ -50,6 +52,12 @@ body {
   grid-template-columns: 4.8rem 1fr auto;
   align-items: center;
   column-gap: 1.8rem;
+  transition: all 0.4s ease-in;
+  padding: 2rem;
+}
+
+.friend-wrapper:hover {
+  background-color: #ffedd5;
 }
 
 .friend-wrapper img {
@@ -83,6 +91,13 @@ body {
 
   border-radius: 0.9rem;
   background-color: #f59e0b;
+  cursor: pointer;
+}
+
+.add-friend--btn {
+  margin-top: 2rem;
+  width: fit-content;
+  margin-left: auto;
 }
 
 /*  */
@@ -95,7 +110,8 @@ body {
 
   background-color: #fff7ed;
   border-radius: 0.9rem;
-  padding: 4rem;
+  padding: 4rem 2rem;
+  align-self: flex-start;
 }
 
 .split-bill--box h2 {
@@ -120,6 +136,19 @@ select {
   font-size: 1.6rem;
   border: none;
   height: 3.2rem;
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+  border-radius: 0.2rem;
+  border: 1px solid #ffedd5;
+}
+
+.splitting-form input:focus,
+select:focus {
+  outline: 1px solid #f59e0b;
+}
+
+.splitting-form button {
+  margin-top: 2rem;
 }
 
 /*  */

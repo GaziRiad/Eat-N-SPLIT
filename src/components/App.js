@@ -1,27 +1,43 @@
+import { useState } from "react";
 import "./../index.css";
 
-const friends = [
+const initialFriends = [
   {
-    id: 1,
+    id: 118836,
+    name: "Clark",
+    image: "https://i.pravatar.cc/48?u=118836",
+    balance: -7,
+  },
+  {
+    id: 933372,
     name: "Sarah",
-    debts: 0,
+    image: "https://i.pravatar.cc/48?u=933372",
+    balance: 20,
   },
   {
-    id: 2,
+    id: 499476,
     name: "Anthony",
-    debts: 0,
+    image: "https://i.pravatar.cc/48?u=499476",
+    balance: 0,
   },
-  // {
-  //   id: 3,
-  //   name: "Clarck",
-  //   debts: 0,
-  // },
 ];
 
 export default function App() {
+  const [addFriend, setAddFriend] = useState(false);
+  function handleAddFriend() {
+    console.log("click");
+    setAddFriend((addFriend) => !addFriend);
+  }
+
   return (
     <div className="app">
-      <Sidebar />
+      <div className="sidebar">
+        <FriendList />
+        <AddFriend addFriend={addFriend} />
+        <Button classB={"add-friend--btn"} handleAddFriend={handleAddFriend}>
+          {addFriend ? "close" : "Add Friend"}
+        </Button>
+      </div>
       <SplitBill />
     </div>
   );
@@ -39,27 +55,16 @@ function SplitBill() {
         <input type="number"></input>
 
         <label>🧑‍🤝‍🧑Sarah expanses</label>
-        <input type="number"></input>
+        <input type="number" disabled></input>
 
         <label>🤑 Who's paying the bill</label>
         <select>
           <option>You</option>
-          {friends.map((friend) => (
-            <option value={friend.name} key={friend.id}>
-              {friend.name}
-            </option>
-          ))}
+          <option value="friend">Sarah</option>
         </select>
+        <span></span>
+        <Button>Split bill</Button>
       </form>
-    </div>
-  );
-}
-
-function Sidebar() {
-  return (
-    <div className="Side-bar">
-      <FriendList />
-      <AddFriend />
     </div>
   );
 }
@@ -68,43 +73,59 @@ function FriendList() {
   return (
     <div className="friend-list-wrapper">
       <ul className="friends-list">
-        {friends.map((friend) => (
-          <Friend key={friend.id} name={friend.name} debt={friend.debts} />
+        {initialFriends.map((friend) => (
+          <Friend
+            key={friend.id}
+            name={friend.name}
+            balance={friend.balance}
+            image={friend.image}
+          />
         ))}
       </ul>
-      <Button className="add-friend--btn">Add Friend</Button>
     </div>
   );
 }
 
-function Friend({ name, debt }) {
+function Friend({ name, image, balance }) {
   return (
     <li className="friend-wrapper">
-      <img src="imgs/friend.jpg" alt="friend img" />
+      <img src={image} alt={`${name}`} />
       <div className="friend-details">
-        <h3>Riad H.</h3>
-        <p>You and {name} are even</p>
+        <h3>{name}</h3>
+        <p style={{ color: balance > 0 ? "green" : balance < 0 ? "red" : {} }}>
+          {balance > 0
+            ? `${name} owes you ${balance}£`
+            : balance === 0
+            ? `You and ${name} are even`
+            : `you owe ${name} ${Math.abs(balance)}£`}
+        </p>
       </div>
       <Button>Select</Button>
     </li>
   );
 }
 
-function AddFriend() {
+function AddFriend({ addFriend }) {
   return (
-    <div className="add-friend-wrapper">
-      <form className="add-friend-form">
-        <label>🧑‍🤝‍🧑 Friend name</label>
-        <input type="text"></input>
-        <label>🖼️ Image URL</label>
-        <input type="text"></input>
-        <span></span>
-        <Button>Add</Button>
-      </form>
-    </div>
+    addFriend && (
+      <div className="add-friend-wrapper">
+        <form className="add-friend-form">
+          <label>🧑‍🤝‍🧑 Friend name</label>
+          <input type="text"></input>
+          <label>🖼️ Image URL</label>
+          <input type="text"></input>
+          <span></span>
+          <Button>Add</Button>
+        </form>
+      </div>
+    )
   );
 }
 
-function Button({ children }) {
-  return <button className="btn-primary">{children}</button>;
+function Button({ classB, handleAddFriend, children }) {
+  return (
+    <button className={`btn-primary ${classB}`} onClick={handleAddFriend}>
+      {children}
+    </button>
+  );
 }

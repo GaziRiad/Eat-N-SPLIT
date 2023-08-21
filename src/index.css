@@ -161,6 +161,7 @@ select:focus {
 .add-friend-form {
   display: grid;
   grid-template-columns: 50% 50%;
+  align-items: center;
   row-gap: 2rem;
 }
 
@@ -173,4 +174,13 @@ select:focus {
 
 .add-friend-form input {
   font-size: 1.8rem;
+  border: none;
+  outline: 1px solid #ffedd5;
+
+  height: 3.2rem;
+  padding: 0.8rem 1.2rem;
+}
+
+.add-friend-form input:focus {
+  outline: 1px solid #f59e0b;
 }

@@ -99,6 +99,7 @@ export default function App() {
           friend={friendSelected}
           // setFriendSelected={setFriendSelected}
           onSplit={handleSplitBill}
+          key={friendSelected.id}
         />
       ) : (
         <></>
